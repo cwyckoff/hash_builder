@@ -97,15 +97,15 @@ which returns only the :name and :address sections of the hash
 
 === Variables
 
-You may pass additional variables to your hash definition when you build it.  Simply pass them after the definition key.
+You may pass additional variables to your hash definition when you build it.  Let's assume you want to use an ActiveRecord 'user' model to dynamically populate your hash instead of hard-coding the values as we did above.  Simply pass the 'user' object to the .build method after the definition key. 
 
   HashBuilder.build(:contact_info, user)
 
-For namespaces, pass them after the namespace key
+For namespaces, pass it after the namespace key
 
   HashBuilder.build(:contact_info, :address, user)
 
-All of this assumes that you will now yield the additional variables in the hash definition:
+All of this assumes that you will now yield the 'user' model in the hash definition:
 
   HashBuilder.define(:contact_info) do |b|
 
