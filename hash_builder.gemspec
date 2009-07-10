@@ -1,6 +1,6 @@
 spec = Gem::Specification.new do |s|
   s.name = 'hash_builder'
-  s.version = '0.0.1'
+  s.version = '0.0.2'
   s.date = '2009-07-09'
   s.summary = 'Hash Builder is a simple tool for offloading the building of hashes.'
   s.email = "github@cwyckoff.com"
