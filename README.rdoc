@@ -17,23 +17,23 @@ Let's say you want to build a hash of user contact information.  In a separate f
 
   HashBuilder.define(:contact_info) do |b|
 
-    bldr.build_hash(:name) do
-      bldr[:title] = "Dr."
-      bldr[:f_name] = "Hawkeye"
-      bldr[:l_name] = "Pierce"
+    b.build_hash(:name) do
+      b[:title] = "Dr."
+      b[:f_name] = "Hawkeye"
+      b[:l_name] = "Pierce"
     end 
 
-    bldr.build_hash(:address) do
-      bldr[:street] = "123 Main St."
-      bldr[:city] = "Crabapple Cove"
-      bldr[:state] = "ME"
-      bldr[:zip] = "04656"
+    b.build_hash(:address) do
+      b[:street] = "123 Main St."
+      b[:city] = "Crabapple Cove"
+      b[:state] = "ME"
+      b[:zip] = "04656"
     end 
 
-    bldr.build_hash(:personal) do
-      bldr[:gender] = "male"
-      bldr[:age] = "50"
-      bldr[:married] = false
+    b.build_hash(:personal) do
+      b[:gender] = "male"
+      b[:age] = "50"
+      b[:married] = false
     end 
 
   end 
@@ -109,23 +109,23 @@ All of this assumes that you will now yield the additional variables in the hash
 
   HashBuilder.define(:contact_info) do |b|
 
-    bldr.build_hash(:name) do |user|
-      bldr[:title] = user.title
-      bldr[:f_name] = user.first_name
-      bldr[:l_name] = user.last_name
+    b.build_hash(:name) do |user|
+      b[:title] = user.title
+      b[:f_name] = user.first_name
+      b[:l_name] = user.last_name
     end 
 
-    bldr.build_hash(:address) do |user|
-      bldr[:street] = user.street
-      bldr[:city] = user.city
-      bldr[:state] = user.state
-      bldr[:zip] = user.zip
+    b.build_hash(:address) do |user|
+      b[:street] = user.street
+      b[:city] = user.city
+      b[:state] = user.state
+      b[:zip] = user.zip
     end 
 
-    bldr.build_hash(:personal) do |user|
-      bldr[:gender] = user.gender
-      bldr[:age] = user.age
-      bldr[:married] = user.married
+    b.build_hash(:personal) do |user|
+      b[:gender] = user.gender
+      b[:age] = user.age
+      b[:married] = user.married
     end 
 
   end 
