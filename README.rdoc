@@ -8,3 +8,99 @@ Are you tired of ugly, cumbersome hashes cluttering up your Rails models and con
 * Chris Wyckoff -- cwyckoff@leadmediapartners.com
 
 
+== Examples
+
+
+=== Definitions
+
+Let's say you want to build a hash of user contact information.  In a separate file, set up a hash definition:
+
+  HashBuilder.define(:contact_info) do |b|
+
+    bldr.build_hash(:name) do
+      bldr[:title] = "Dr."
+      bldr[:f_name] = "Hawkeye"
+      bldr[:l_name] = "Pierce"
+    end 
+
+    bldr.build_hash(:address) do
+      bldr[:street] = "123 Main St."
+      bldr[:city] = "Crabapple Cove"
+      bldr[:state] = "ME"
+      bldr[:zip] = "04656"
+    end 
+
+  end 
+
+
+=== Building
+
+Each definition requires a key -- in this case *:contact_info*.  Moreover, within the contact definition, you may set up namespaces (*:name* and *:address*) to further organize your hash content.
+
+In order to build your hash, simply call
+
+  HashBuilder.build(:contact_info)
+
+which will return 
+
+  { 
+    :title => "Dr.",
+    :f_name => "Hawkeye",
+    :l_name => "Pierce",
+    :street => "123 Main St.",
+    :city => "Crabapple Cove",
+    :state => "ME",
+    :zip => "04656",
+  }
+
+If you want to call an individual namespace, call
+
+  HashBuilder.build_namespace(:contact_info, :address)
+
+which will return only 
+
+  { 
+    :street => "123 Main St.",
+    :city => "Crabapple Cove",
+    :state => "ME",
+    :zip => "04656",
+  }
+
+To select multiple namespaces, set them in a block:
+
+  HashBuilder.build(:contact_info) do |b|
+    b.using :name
+    b.using :address
+  end
+
+
+=== Additional Variables
+
+You may pass additional variables to your hash definition when you build it.  Simply pass them after the definition key.
+
+  HashBuilder.build(:contact_info, user)
+
+For namespaces, pass them after the namespace key
+
+  HashBuilder.build(:contact_info, :address, user)
+
+All of this assumes that you will now yield the additional variables in the hash definition:
+
+  HashBuilder.define(:contact_info) do |b|
+
+    bldr.build_hash(:name) do |user|
+      bldr[:title] = user.title
+      bldr[:f_name] = user.first_name
+      bldr[:l_name] = user.last_name
+    end 
+
+    bldr.build_hash(:address) do |user|
+      bldr[:street] = user.street
+      bldr[:city] = user.city
+      bldr[:state] = user.state
+      bldr[:zip] = user.zip
+    end 
+
+  end 
+  
+
