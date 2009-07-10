@@ -1,0 +1,10 @@
+= Hash Builder
+
+Are you tired of ugly, cumbersome hashes cluttering up your Rails models and controllers.  Well, Hash Builder is a simple tool for building hashes that allows you define hashes separate from your code, keeping your code clean and focused on its core responsibilities.  The hashes themselves are then easy to organize and manipulate.
+
+
+== Author
+
+* Chris Wyckoff -- cwyckoff@leadmediapartners.com
+
+
