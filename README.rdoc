@@ -17,6 +17,30 @@ Let's say you want to build a hash of user contact information.  In a separate f
 
   HashBuilder.define(:contact_info) do |b|
 
+    b.build_hash do
+      b[:title] = "Dr."
+      b[:f_name] = "Hawkeye"
+      b[:l_name] = "Pierce"
+      b[:street] = "123 Main St."
+      b[:city] = "Crabapple Cove"
+      b[:state] = "ME"
+      b[:zip] = "04656"
+      b[:gender] = "male"
+      b[:age] = "50"
+      b[:married] = false
+    end 
+
+  end 
+
+Each definition requires a key -- in this case :contact_info.  Our contact_info hash is now registered to that key and we are free to buid away within the block passed to the #build_hash method.
+
+
+=== Namespaces
+
+For complex hash construction, it helps to organize your data with namespaces; in the example below I've set up three separate namespaces, :name, :address, and :personal, which are keys registered with the #buid_hash method.
+
+  HashBuilder.define(:contact_info) do |b|
+
     b.build_hash(:name) do
       b[:title] = "Dr."
       b[:f_name] = "Hawkeye"
@@ -41,7 +65,6 @@ Let's say you want to build a hash of user contact information.  In a separate f
 
 === Building
 
-Each definition requires a key -- in this case :contact_info.  Moreover, within the contact definition, you may set up namespaces (:name, :address, and :personal) to further organize your hash content.
 
 In order to build your hash, simply call
 
@@ -62,7 +85,7 @@ which will return
     :married => false,
   }
 
-If you want to build an individual namespace, call
+If you have set up namespaces and you only want to build an individual namespace, use the #build_namespace method
 
   HashBuilder.build_namespace(:contact_info, :address)
 
@@ -103,9 +126,9 @@ You may pass additional variables to your hash definition when you build it.  Le
 
 For namespaces, pass it after the namespace key
 
-  HashBuilder.build(:contact_info, :address, user)
+  HashBuilder.build_namespace(:contact_info, :address, user)
 
-All of this assumes that you will now yield the 'user' model in the hash definition:
+This requires, however, that you now yield the 'user' model in the hash definition:
 
   HashBuilder.define(:contact_info) do |b|
 
@@ -130,4 +153,4 @@ All of this assumes that you will now yield the 'user' model in the hash definit
 
   end 
   
-
+You may pass as many additional variables as you like.  Just remember to yield them to your hash block.
