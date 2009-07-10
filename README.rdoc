@@ -11,7 +11,7 @@ Are you tired of ugly, cumbersome hashes cluttering up your Rails models and con
 == Examples
 
 
-=== Definitions
+=== Defining
 
 Let's say you want to build a hash of user contact information.  In a separate file, set up a hash definition:
 
@@ -30,12 +30,18 @@ Let's say you want to build a hash of user contact information.  In a separate f
       bldr[:zip] = "04656"
     end 
 
+    bldr.build_hash(:personal) do
+      bldr[:gender] = "male"
+      bldr[:age] = "50"
+      bldr[:married] = false
+    end 
+
   end 
 
 
 === Building
 
-Each definition requires a key -- in this case :contact_info.  Moreover, within the contact definition, you may set up namespaces (:name and :address) to further organize your hash content.
+Each definition requires a key -- in this case :contact_info.  Moreover, within the contact definition, you may set up namespaces (:name, :address, and :personal) to further organize your hash content.
 
 In order to build your hash, simply call
 
@@ -51,13 +57,16 @@ which will return
     :city => "Crabapple Cove",
     :state => "ME",
     :zip => "04656",
+    :gender => "mail",
+    :age => "50",
+    :married => false,
   }
 
 If you want to build an individual namespace, call
 
   HashBuilder.build_namespace(:contact_info, :address)
 
-which will return only 
+which will return only the :address section of the hash
 
   { 
     :street => "123 Main St.",
@@ -73,8 +82,20 @@ To select multiple namespaces, set them in a block:
     b.using :address
   end
 
+which returns only the :name and :address sections of the hash
 
-=== Additional Variables
+  { 
+    :title => "Dr.",
+    :f_name => "Hawkeye",
+    :l_name => "Pierce",
+    :street => "123 Main St.",
+    :city => "Crabapple Cove",
+    :state => "ME",
+    :zip => "04656",
+  }
+
+
+=== Variables
 
 You may pass additional variables to your hash definition when you build it.  Simply pass them after the definition key.
 
@@ -99,6 +120,12 @@ All of this assumes that you will now yield the additional variables in the hash
       bldr[:city] = user.city
       bldr[:state] = user.state
       bldr[:zip] = user.zip
+    end 
+
+    bldr.build_hash(:personal) do |user|
+      bldr[:gender] = user.gender
+      bldr[:age] = user.age
+      bldr[:married] = user.married
     end 
 
   end 

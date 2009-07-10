@@ -1,5 +1,5 @@
-require File.expand_path(File.dirname(__FILE__) + "/../spec_helper")
-require File.expand_path(File.dirname(__FILE__) + "/../fixtures/foo_builder")
+require File.expand_path(File.dirname(__FILE__) + "/spec_helper")
+require File.expand_path(File.dirname(__FILE__) + "/fixtures/foo_builder")
 
 describe HashBuilder do
 
@@ -84,7 +84,7 @@ describe HashBuilder do
       end 
 
       # expect
-      mock_event = mock_model(Referral, :bar => "baz")
+      mock_event = mock("Foo", :bar => "baz")
       HashBuilder.build(:foo, mock_event).should == {:bar => "baz"}
     end
 

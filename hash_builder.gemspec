@@ -1,6 +1,6 @@
 spec = Gem::Specification.new do |s|
   s.name = 'hash_builder'
-  s.version = '0.0.2'
+  s.version = '0.0.3'
   s.date = '2009-07-09'
   s.summary = 'Hash Builder is a simple tool for offloading the building of hashes.'
   s.email = "github@cwyckoff.com"
@@ -11,5 +11,7 @@ spec = Gem::Specification.new do |s|
   s.extra_rdoc_files = ["README.rdoc", "MIT-LICENSE"]
   s.authors = ["Chris Wyckoff"]
   
-  s.files = ["init.rb", "lib/hash_builder/hash_builder.rb"]
+  s.files = ["init.rb", 
+             "lib/hash_builder.rb",
+             "lib/hash_builder/hash_builder.rb"]
 end
